@@ -34,17 +34,18 @@ public class Document {
 	}
 
 
-	//alternative get Files Path
-	public void getFilesInPath(){
-		ArrayList<String> filesList = new ArrayList<String>();
-
-		File[] files = new File("/home/daney/Desktop/Files/").listFiles();
-
-		for (File file : files) {
-			if (file.isFile()) {
-				filesList.add(file.getName());
-			}
-		}
+	
+	
+	
+	//Getters and Setters
+	public ArrayList<File> getAllFiles(){
+		return null;
 	}
 
+
+	public void setAllFiles(ArrayList<String> allFiles) {
+		this.allFiles = allFiles;
+	}
+
+	
 }

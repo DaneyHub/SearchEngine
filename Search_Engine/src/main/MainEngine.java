@@ -2,25 +2,34 @@ package main;
 
 import java.io.*;
 import java.util.*;
+import java.util.regex.*;
 
-public class MainEngine extends Document{
+public class MainEngine{
 
 	ArrayList<String> files = new ArrayList<String>();
 
 
+
+	
+
+
+
 	public static void main(String[] args) throws FileNotFoundException {
 
-		Scanner input;
+		Map<Integer, String> map = new HashMap<Integer, String>();
+		map.put(1, "type of animal");
+		System.out.println(map.get(1));
+		/*
+		Scanner input = new Scanner(System.in);
 		MainEngine mainEngine = new MainEngine();
-		input = new Scanner(System.in);
 		String word;		
 		do {
-			System.out.println("Enter a word to search (No Space)");			
-			word = input.nextLine();
+			System.out.println("Enter a word (without Space) to search");			
+			word = input.nextLine().trim();
 		} while (mainEngine.hasSpace(word));	
 		input.close();
 
-		mainEngine.SearchWord(word);
+		mainEngine.SearchWord(word);*/
 	}
 
 
@@ -30,11 +39,12 @@ public class MainEngine extends Document{
 
 		Document doc = new Document();
 		ArrayList<String> docs = doc.getFilesInPath(word);
-		System.out.print("[");
+		String listText = "";
 		for (String file : docs) {
-			System.out.print(file + ", ");
+			listText += file + ", ";
 		}
-		System.out.print("]");
+		listText = listText.substring(0, listText.length()-2);
+		System.out.print("[" + listText+ "]");
 
 	}
 
@@ -48,7 +58,23 @@ public class MainEngine extends Document{
 		}
 		return false;
 	}
+	
+	
+	
+	
+	
+	
 
+
+	
+	//Getters and Setters
+	public ArrayList<String> getFiles() {
+		return files;
+	}
+
+	public void setFiles(ArrayList<String> files) {
+		this.files = files;
+	}
 
 
 }
