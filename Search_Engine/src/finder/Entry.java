@@ -16,19 +16,12 @@ public class Entry {
 	public static void main(String[] args) throws FileNotFoundException {
 		Entry entry = new Entry();
 		entry.start();
-//		DocumentProcessor ind = new Indexer();
-//		ind.getFilesInPath("word");
 
 	}
 
 	public void start() throws FileNotFoundException{
 
-		SearchEngine mainEngine = new SearchEngine();
-
-		//		do {
-		//			System.out.println("Enter a word (without Space) to search");			
-		//			word = input.nextLine().trim();
-		//		} while (mainEngine.hasSpace(word));	
+		SearchEngine mainEngine = new SearchEngine();	
 
 		do{
 			System.out.println("Enter a word to search or 'qx' to Quit");	
