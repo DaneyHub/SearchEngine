@@ -8,9 +8,9 @@ import java.util.Scanner;
 
 public class DocumentProcessor extends Document {
 
+
 	
-	//public documents
-	
+
 	ArrayList<String> allFiles;
 	Field field[]; 	
 	static File path = new File("/home/daney/Desktop/Files");
@@ -18,9 +18,8 @@ public class DocumentProcessor extends Document {
 
 	public DocumentProcessor(){
 		allFiles = new ArrayList<String>();
-		field = DocumentProcessor.class.getFields();
+		field = Document.class.getFields();
 	}
-
 
 	//get files from folder
 	public ArrayList<String> getFilesInPath(String word) throws FileNotFoundException{
@@ -46,24 +45,30 @@ public class DocumentProcessor extends Document {
 		}
 		return false;
 	}
-	
+
 	//get declared document names in Document class. 
 	@Override
 	public ArrayList<String> getStringFiles(){
-		
+
 		ArrayList<String> docs_ = new ArrayList<String>();
-		
-        for (int i = 0; i < field.length; i++)
-        {
-            docs_.add(field[i].getName());
-        } 
-		
-		
+
+		for (int i = 0; i < field.length; i++)
+		{
+			docs_.add(field[i].getName());
+		} 
+
+
 		return docs_;
 	}
 
 
+	//divide each document into individual words.
+	public String[] tokenizeDoc(String str) {
+		String[] splitStr = str.split(" ");
+		return splitStr;
 
+	}
+	
 	//alternative get Files Path
 	public void getFilesInPath(){
 		ArrayList<String> filesList = new ArrayList<String>();

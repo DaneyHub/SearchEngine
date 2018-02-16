@@ -9,14 +9,13 @@ public class Entry {
 	private Scanner input;
 
 	public Entry(){
-		
+
 		input = new Scanner(System.in);
 	}
 
 	public static void main(String[] args) throws FileNotFoundException {
 		Entry entry = new Entry();
 		entry.start();
-
 	}
 
 	public void start() throws FileNotFoundException{
@@ -32,12 +31,12 @@ public class Entry {
 				word = input.nextLine().trim();
 			};
 
-			
+
 			//mainEngine.SearchWord_LocalFolder(word); //An alternative to read files from folder 
 			mainEngine.SearchWord(word);
-			
+
 		}while(!word.equals("qx"));
-		
+
 		input.close();
 		System.out.println("Exited");	
 		System.exit(0);
