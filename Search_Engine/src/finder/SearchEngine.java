@@ -16,7 +16,7 @@ public class SearchEngine {
 		//Two options. first without Mapped index
 		//second from Mapped index
 		
-		//ArrayList<String> docsUsingIndex = indexer.getFilesInPath(word);	
+		//ArrayList<String> docsUsingIndex = indexer.getDocumentNames(word);	
 		ArrayList<String> docsUsingIndex = indexer.createIndex(word);	
 
 		if (docsUsingIndex!=null)
@@ -30,7 +30,7 @@ public class SearchEngine {
 	public void SearchWord_LocalFolder(String word) throws FileNotFoundException {
 
 		DocumentProcessor document = new DocumentProcessor();		
-		ArrayList<String> docs = document.getFilesInPath(word);		
+		ArrayList<String> docs = document.getDocumentNames(word);		
 		String listText = "";
 		for (String file : docs) {
 			listText += file + ", ";

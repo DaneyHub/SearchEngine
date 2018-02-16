@@ -2,11 +2,9 @@ package finder;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 
 public class Indexer extends DocumentProcessor {
@@ -14,9 +12,9 @@ public class Indexer extends DocumentProcessor {
 
 	public DocumentProcessor document;
 
-	ArrayList<String> docFileNames;
-	ArrayList<String> docsStrings;
-	ArrayList<Integer> wordFoundTimes;
+	ArrayList<String> docFileNames; //Documents that have a searched token
+	ArrayList<String> docsStrings; //storage for all document variables in Document class as a String
+	ArrayList<Integer> termFrequency;
 	ArrayList<String> strFiles;
 	ArrayList<String> index;
 
@@ -44,9 +42,10 @@ public class Indexer extends DocumentProcessor {
 			}
 		}		
 		
-		//Add each words/tokens with the documents they are in.
+		//Add each words/tokens with the associated documents by sorting them.
+		Collections.sort(tokens);
 		for (String str:tokens){			
-			map_doc.put(str, getFilesInPath(str));			
+			map_doc.put(str, getDocumentNames(str));			
 		}
 		
 		//The index table
@@ -55,42 +54,43 @@ public class Indexer extends DocumentProcessor {
 			System.out.println(str +"\t --> \t" + map_doc.get(str));				
 			}
 		System.out.println("----------------------------------------------------------\n");
+		
 		return (map_doc.get(word));
 
 	}
 
 
-	//get Files from document files
+	//get Documents name from Document class
 	@Override
-	public ArrayList<String> getFilesInPath(String word) throws FileNotFoundException{
+	public ArrayList<String> getDocumentNames(String word) throws FileNotFoundException{
 
 
 		strFiles = document.getStringFiles();
 		docFileNames = new ArrayList<String>();
-		wordFoundTimes = new ArrayList<Integer>();
+		termFrequency = new ArrayList<Integer>();
 		
 		
-		int counterFreq = 0; // Count frequency of word in each doc
+		int countFreqency = 0; // Count frequency of word in each doc
 
 		String[] splitString;
 		for (int i=0; i<docsStrings.size();i++) {
 			splitString = document.tokenizeDoc(docsStrings.get(i));
 			for(String str: splitString){
 				if(word.equals(str)){
-					counterFreq++;								
+					countFreqency++;								
 				}
 			}
 
-			wordFoundTimes.add(counterFreq);
-			counterFreq = 0;				
+			termFrequency.add(countFreqency);
+			countFreqency = 0;				
 		}		
 
 		//Sort docs by the searched word frequency
 		sortDocs();
 
-		int count_0s=0; //Count number of docs with the word is found 0 times.
+		int count_0s=0; //Count number of docs with 0 term frequency
 
-		for (int val:wordFoundTimes ){
+		for (int val:termFrequency ){
 			if(val==0)
 				count_0s++;
 		}
@@ -103,11 +103,6 @@ public class Indexer extends DocumentProcessor {
 		return  docFileNames;
 	}
 
-	public ArrayList<String> sort(ArrayList<String> docs) {
-
-		return docs;
-	}
-
 	public void sortDocs() {
 
 		String tempStr;
@@ -116,17 +111,17 @@ public class Indexer extends DocumentProcessor {
 
 			for (int j=i; j>0;j--){
 
-				if (wordFoundTimes.get(j)>wordFoundTimes.get(j-1)){
+				if (termFrequency.get(j)>termFrequency.get(j-1)){
 					tempStr = strFiles.get(j); 
 					strFiles.remove(j);
 					strFiles.add(j, strFiles.get(j-1));
 					strFiles.remove(j-1);
 					strFiles.add(j-1, tempStr);
-					tempInt = wordFoundTimes.get(j); 
-					wordFoundTimes.remove(j);
-					wordFoundTimes.add(j, wordFoundTimes.get(j-1));
-					wordFoundTimes.remove(j-1);
-					wordFoundTimes.add(j-1, tempInt);
+					tempInt = termFrequency.get(j); 
+					termFrequency.remove(j);
+					termFrequency.add(j, termFrequency.get(j-1));
+					termFrequency.remove(j-1);
+					termFrequency.add(j-1, tempInt);
 				}
 
 			}				

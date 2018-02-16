@@ -22,7 +22,7 @@ public class DocumentProcessor extends Document {
 	}
 
 	//get files from folder
-	public ArrayList<String> getFilesInPath(String word) throws FileNotFoundException{
+	public ArrayList<String> getDocumentNames(String word) throws FileNotFoundException{
 
 
 		for (int i = 0; i < listOfFiles.length; i++) {
@@ -69,8 +69,8 @@ public class DocumentProcessor extends Document {
 
 	}
 	
-	//alternative get Files Path
-	public void getFilesInPath(){
+	//alternative get Documents in Path
+	public void getDocumentNames(){
 		ArrayList<String> filesList = new ArrayList<String>();
 
 		File[] files = new File("/home/daney/Desktop/Files/").listFiles();
